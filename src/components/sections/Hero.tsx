@@ -10,12 +10,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function Hero() {
   const container = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLDivElement>(null);
   const textWrapperRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    if (!container.current) return;
+    if (!container.current || !videoRef.current || !textWrapperRef.current || !ctaRef.current) return;
 
     // Pin the hero section for a cinematic scroll duration (200% of viewport)
     const tl = gsap.timeline({
@@ -55,6 +55,8 @@ export function Hero() {
     const headline = textWrapperRef.current?.querySelector("h1");
     const h2 = textWrapperRef.current?.querySelector("h2");
     const subhead = textWrapperRef.current?.querySelector("p");
+
+    if (!headline || !h2 || !subhead || !ctaRef.current) return;
 
     gsap.set([headline, h2, subhead, ctaRef.current], { y: 40, opacity: 0 });
 
